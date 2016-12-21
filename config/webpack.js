@@ -4,6 +4,7 @@ import fs from 'fs';
 import webpack from 'webpack';
 import CopyPlugin from 'copy-webpack-plugin';
 import CleanPlugin from 'clean-webpack-plugin';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 /* path and env */
 const PWD = process.cwd();
@@ -91,17 +92,58 @@ const plugins = [
   new CopyPlugin(
     copyAssets
   ),
+  new ExtractTextPlugin('css/main.css'),
 ];
 
 /* postcss */
-import pseudoPostPlugin from 'postcss-preudo-plugin';
-import variablesPostPlugin from 'postcss-css-variables';
+import pseudoPostPlugin from 'postcss-pseudo-classes';
+import variablesPostPlugin from 'postcss-simple-vars';
+import cssnextPostPlugin from 'postcss-cssnext';
+import mixinsPostPlugin from 'postcss-mixins';
+import utilitiesPostPlugin from 'postcss-utilities';
+import nestedPostPlugin from 'postcss-nested';
+import ancestorsPostPlugin from 'postcss-nested-ancestors';
+import mediaPostPlugin from 'postcss-reverse-media';
+import injectPostPlugin from 'postcss-inject';
+import resemblePostPlugin from 'postcss-resemble-image';
+import magicianPostPlugin from 'postcss-font-magician';
+import customMediaPostPlugin from 'postcss-custom-media';
+import lostPostPlugin from 'lost';
+import spritesPostPlugin from 'postcss-sprites';
+import importPostPlugin from 'postcss-import';
 
+const csspath = path.resolve(PWD, 'styles/common.css');
 const postcssPlugins = [
-  variablesPostPlugin(),
+  injectPostPlugin: ({
+    injectTo: 'fileStart',
+    filePath: csspath,
+  }),
+  variablesPostPlugin({
+    unknown: (node, name, result) => {
+      node.warn(result, `Unknown variable ${name}`);
+    },
+  }),
+  importPostPlugin,
+  mixinsPostPlugin,
+  cssnextPostPlugin,
+  utilitiesPostPlugin,
+  nestedPostPlugin,
+  ancestorsPostPlugin,
+  mediaPostPlugin,
+  resemblePostPlugin(),
+  magicianPostPlugin(),
+  customMediaPostPlugin(),
+  lostPostPlugin(),
   pseudoPostPlugin({ allCombinations: true, preserveBeforeAfter: false }),
-
+  spritesPostPlugin({
+    stylesheetPath: path.resolve(BUILD_DIR, 'css'),
+    spritePath: path.resolve(BUILD_DIR, 'images'),
+  }),
 ];
+const cssLoader = {
+  test: /\.css$/,
+  loader: ExtractTextPlugin.extract([ 'css-loader', 'postcss-loader']),
+};
 
 /* export */
 const config = {
@@ -115,6 +157,8 @@ const config = {
     filename: 'js/[name].js',
     chunkFilename: '[chunkhash].js',
     path: BUILD_DIR,
+    libraryTarget: 'var',
+    library: 'className',
   },
   resolveLoader: {
     modulesDirectories,
@@ -127,14 +171,18 @@ const config = {
     loaders: [
       jsLoader,
       { test: /\.json$/, loader: 'json-loader' },
+      cssLoader,
     ],
   },
   plugins,
   devServer: {
     outputPath: BUILD_DIR,
     contentBase: BUILD_DIR,
-    hot: true
-  }
+    hot: true,
+  },
+  postcss: {
+    plugins: postcssPlugins,
+  },
 };
 
 
