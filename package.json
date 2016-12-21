@@ -11,7 +11,7 @@
     "mocha:all": "better-npm-run mocha:all",
     "mocha:features": "better-npm-run mocha:features",
     "mocha:spec": "better-npm-run mocha:spec",
-    "webpack-dev": "webpack-dev-server --inline --hot"
+    "webpack-dev": "nodemon --exec \"webpack-dev-server --inline --hot\" --ignore ./src "
   },
   "betterScripts": {
     "mocha:all": {
@@ -66,6 +66,9 @@
     "flow-bin": "^0.36.0",
     "json-loader": "^0.5.4",
     "mocha": "^3.2.0",
+    "postcss": "^5.2.6",
+    "postcss-css-variables": "^0.6.0",
+    "postcss-pseudo-classes": "^0.1.0",
     "sinon": "^1.17.6",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2",
@@ -74,6 +77,7 @@
   },
   "dependencies": {
     "app-module-path": "^2.1.0",
+    "classnames": "^2.2.5",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-transform-catch-errors": "^1.0.2",

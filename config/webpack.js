@@ -10,6 +10,7 @@ const PWD = process.cwd();
 const SRC_DIR = path.resolve(PWD, 'src');
 const BUILD_DIR = path.resolve(PWD, 'dist');
 const STATIC_DIR = path.resolve(PWD, 'static/');
+const BOWER_DIR = path.resolve(PWD, 'bower_components/');
 
 /* config keys */
 const modulesDirectories = [
@@ -57,7 +58,28 @@ jsLoader.loaders.push(babelLoader(process.env));
 
 
 /* cpy assets */
+const bowerrc =  require(path.resolve(PWD, 'bower.json'));
 const CopyStatic = { from: STATIC_DIR, to: BUILD_DIR };
+
+const cps = {
+  'font-awesome': [
+    { from: path.resolve(BOWER_DIR, 'font-awesome/css'),
+      to: path.resolve(BUILD_DIR, 'css') },
+    { from: path.resolve(BOWER_DIR, 'font-awesome/fonts'),
+      to: path.resolve(BUILD_DIR, 'fonts') },
+  ],
+};
+
+
+const copyAssets = [
+  CopyStatic,
+];
+
+Object.keys(bowerrc.dependencies).forEach((key) => {
+  if (cps[key]) {
+    cps[key].forEach(asset => copyAssets.push(asset));
+  }
+});
 
 /* plugins */
 const plugins = [
@@ -66,11 +88,20 @@ const plugins = [
   }),
   new webpack.optimize.OccurenceOrderPlugin(),
   new webpack.NoErrorsPlugin(),
-  new CopyPlugin([
-    CopyStatic,
-  ]),
+  new CopyPlugin(
+    copyAssets
+  ),
 ];
 
+/* postcss */
+import pseudoPostPlugin from 'postcss-preudo-plugin';
+import variablesPostPlugin from 'postcss-css-variables';
+
+const postcssPlugins = [
+  variablesPostPlugin(),
+  pseudoPostPlugin({ allCombinations: true, preserveBeforeAfter: false }),
+
+];
 
 /* export */
 const config = {

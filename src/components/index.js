@@ -1,14 +1,11 @@
 import React from 'react';
+import classnames from 'classnames';
 
 export function HeaderBar({children}) {
   return (<div> {children} </div>);
 }
 export function Page({children}) {
   return (<div> {children} </div>);
-}
-
-export function Logo({def}) {
-  return (<h1> {def} </h1>);
 }
 
 export function Navbar({links}) {
@@ -21,4 +18,12 @@ export function SearchForm({children}) {
 
 export function CartCounter({children}) {
   return (<div> cart 0 </div>);
+}
+
+
+export * as proto from './proto';
+
+export function FaIcon({name, className=''}) {
+  const nextClassName = classnames(className, 'fa', `fa-${name}`);
+  return (<span className={nextClassName} />);
 }

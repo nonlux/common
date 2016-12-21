@@ -1,0 +1,20 @@
+{
+  "name": "common",
+  "description": "common js code",
+  "main": "index.js",
+  "authors": [
+    "nonlux <nonluxi@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/nonlux/common",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "font-awesome": "^4.7.0"
+  }
+}

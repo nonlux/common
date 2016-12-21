@@ -4,6 +4,8 @@ import ReactDOMServer from 'react-dom/server';
 
 import * as components from 'components';
 
+console.log(components);
+
 const page = {
   HeaderBar: {
     Logo: 'Jupiter proto',
@@ -37,11 +39,12 @@ function generateObject(name, object) {
   } else if (typeof object === 'string') {
     props.def = object;
   }
-  if (!components[name]) {
+  const component = components[name] ? components[name] : components.proto[name];
+  if (!component) {
     throw new Error(`no exist component ${name}`);
   }
 
-  const args = [components[name], props, ...childs];
+  const args = [component, props, ...childs];
   return React.createElement(...args);
 }
 
