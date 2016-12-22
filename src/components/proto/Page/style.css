@@ -1,0 +1,21 @@
+@import "styles/common";
+@import "normalize.css";
+
+body {
+    font-size: $baseFontSize;
+    line-height: 1.5;
+    font-family: "Roboto";
+    color: $baseColor;
+    background-color: $backColor;
+
+}
+
+a {
+    cursor: pointer;
+    color: $linkColor;
+
+    &:hover {
+        text-decoration: underline;
+    }
+
+}

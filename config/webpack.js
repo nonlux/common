@@ -59,7 +59,7 @@ jsLoader.loaders.push(babelLoader(process.env));
 
 
 /* cpy assets */
-const bowerrc =  require(path.resolve(PWD, 'bower.json'));
+const bowerrc =  require(path.resolve(PWD, 'package.json'));
 const CopyStatic = { from: STATIC_DIR, to: BUILD_DIR };
 
 const cps = {
@@ -107,23 +107,24 @@ import mediaPostPlugin from 'postcss-reverse-media';
 import injectPostPlugin from 'postcss-inject';
 import resemblePostPlugin from 'postcss-resemble-image';
 import magicianPostPlugin from 'postcss-font-magician';
-import customMediaPostPlugin from 'postcss-custom-media';
 import lostPostPlugin from 'lost';
 import spritesPostPlugin from 'postcss-sprites';
 import importPostPlugin from 'postcss-import';
 
 const csspath = path.resolve(PWD, 'styles/common.css');
 const postcssPlugins = [
-  injectPostPlugin: ({
-    injectTo: 'fileStart',
-    filePath: csspath,
+  // injectPostPlugin: ({
+  //   injectTo: 'fileStart',
+  //   filePath: csspath,
+  // }),
+  importPostPlugin({
+    path: SRC_DIR,
   }),
   variablesPostPlugin({
     unknown: (node, name, result) => {
       node.warn(result, `Unknown variable ${name}`);
     },
   }),
-  importPostPlugin,
   mixinsPostPlugin,
   cssnextPostPlugin,
   utilitiesPostPlugin,
@@ -132,7 +133,6 @@ const postcssPlugins = [
   mediaPostPlugin,
   resemblePostPlugin(),
   magicianPostPlugin(),
-  customMediaPostPlugin(),
   lostPostPlugin(),
   pseudoPostPlugin({ allCombinations: true, preserveBeforeAfter: false }),
   spritesPostPlugin({
@@ -146,12 +146,14 @@ const cssLoader = {
 };
 
 /* export */
+
 const config = {
   cache: true,
   context: PWD,
   devtool,
   entry: {
     main: 'src/index.js',
+    dev: 'styles/common.css',
   },
   output: {
     filename: 'js/[name].js',
@@ -172,6 +174,13 @@ const config = {
       jsLoader,
       { test: /\.json$/, loader: 'json-loader' },
       cssLoader,
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loaders: [
+          'file?hash=sha512&digest=hex&name=[hash].[ext]',
+          'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false',
+        ],
+      },
     ],
   },
   plugins,

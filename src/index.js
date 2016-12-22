@@ -4,10 +4,6 @@ import ReactDOMServer from 'react-dom/server';
 
 import * as components from 'components';
 
-require('./some.css');
-
-console.log(components);
-
 const page = {
   HeaderBar: {
     Logo: 'Jupiter proto',

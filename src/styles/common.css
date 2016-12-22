@@ -1,0 +1,15 @@
+$baseFontSize: 16px;
+$baseGutter: 10px;
+$baseGreyColor: #333;
+$backColor: #f9f9f9;
+/* #F1EEEC; */
+/* #ecf0f1; */
+$linkColor: #3498db;
+$baseColor: #2c3e50;
+
+$logoFontSize: calc($baseFontSize *1.5);
+$logoImageSize: 50px;
+$logoGutter: $baseGutter;
+
+$navGutter: $baseGutter;
+$navHalfGutter: calc($navGutter/2);

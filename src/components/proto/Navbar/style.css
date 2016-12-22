@@ -1,0 +1,22 @@
+@import "styles/common.css";
+
+.proto-navbar {
+    display: inline-block;
+    list-style: none;
+    padding: 0;
+
+    .item {
+      display: inline-block;
+      margin: 0 $navHalfGutter;
+
+    &:first-child {
+        margin-left: $navGutter;
+    }
+    
+    &:last-child {
+        margin-right: $navGutter;
+    }
+
+    }
+
+}

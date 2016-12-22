@@ -1,0 +1,16 @@
+@import "styles/common.css";
+.proto-logo {
+    font-size: $logoFontSize;
+    line-height: $logoFontSize;
+    margin: 0 $logoGutter;
+    vertical-align: middle;
+    display: inline-block;
+
+    .image {
+        @util size($logoImageSize);
+        vertical-align: middle;
+        margin-right: 10px;
+    }
+}
+
+    
