@@ -1,0 +1,56 @@
+@import "styles/common.css";
+
+.proto-search-form {
+    display: inline-block;
+
+    input,
+    button {
+        background-color: $inputBackColor;
+        color: $inputColor;
+        border: 1px solid $inputBorderColor;
+        padding: $inputPadding;
+
+        &:focus,
+        &:active {
+                     border: 1px solid $inputActiveBorderColor;
+                     outline: none;
+                 }
+    }
+
+    button  {
+        box-sizing: border-box;
+        
+        position: relative;
+        background-color: $inputBackColor;
+        color: $inputColor;
+        border: 1px solid $inputBorderColor;
+        padding: $inputPadding;
+        border-left: 0;
+
+
+        &:focus,
+        &:active,
+        &:hover {
+            color: $inputActiveBorderColor;
+            border: 1px solid $inputActiveBorderColor;
+            border-left: 0;
+
+            outline: none;
+            &:before {
+                content: " ";
+                position: absolute;
+                z-index: 10;
+                top: 0px;
+                left: -1px;
+                bottom: 0px;
+                border-left: 1px solid $inputActiveBorderColor;
+            }
+        }
+
+        &:active {
+            color: $inputBackColor;
+            background-color: $inputActiveBorderColor;
+        }
+
+    }
+}

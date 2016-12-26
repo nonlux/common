@@ -10,10 +10,10 @@ export default class Page extends Component {
 
   render() {
     const {children, className} = this.props;
-    const nextClassName = classnames(className);
+    const nextClassName = classnames(className, 'proto-page');
 
     return (
-      <div>
+      <div className={nextClassName}>
         {children}
       </div>
     );

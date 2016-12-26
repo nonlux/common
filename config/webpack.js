@@ -92,7 +92,7 @@ const plugins = [
   new CopyPlugin(
     copyAssets
   ),
-  new ExtractTextPlugin('css/main.css'),
+  new ExtractTextPlugin('main.css'),
 ];
 
 /* postcss */
@@ -135,14 +135,11 @@ const postcssPlugins = [
   magicianPostPlugin(),
   lostPostPlugin(),
   pseudoPostPlugin({ allCombinations: true, preserveBeforeAfter: false }),
-  spritesPostPlugin({
-    stylesheetPath: path.resolve(BUILD_DIR, 'css'),
-    spritePath: path.resolve(BUILD_DIR, 'images'),
-  }),
 ];
 const cssLoader = {
   test: /\.css$/,
-  loader: ExtractTextPlugin.extract([ 'css-loader', 'postcss-loader']),
+  loader: ExtractTextPlugin.extract([ `css-loader`, 'postcss-loader']),
+  root: path.resolve(BUILD_DIR)
 };
 
 /* export */

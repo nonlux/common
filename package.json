@@ -95,7 +95,9 @@
   },
   "dependencies": {
     "app-module-path": "^2.1.0",
+    "bytesize-icons": "^1.1.0",
     "classnames": "^2.2.5",
+    "evil-icons": "^1.9.0",
     "file-loader": "^0.9.0",
     "font-awesome": "^4.7.0",
     "image-loader": "^0.0.1",

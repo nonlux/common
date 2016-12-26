@@ -1,0 +1,5 @@
+@import 'styles/common.css';
+.proto-headerbar {
+    border: 1px solid $baseColor;
+    border-top: 0;
+}

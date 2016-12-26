@@ -19,7 +19,7 @@ const page = {
       ],
     },
     SearchForm: true,
-    CartCounter: true,
+    CartMarker: '0',
   },
 };
 
