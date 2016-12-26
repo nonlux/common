@@ -22,7 +22,7 @@ export default class Navbar extends Component {
     return (
       <ul className={nextClassName}>
         {links && links.map((link, key) => (
-          <li className="item" key={key}>
+          <li id={link} className="item" key={key}>
             <a>{link}</a>
           </li>
         ))}
