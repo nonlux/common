@@ -1,5 +1,12 @@
-Feature: Main
+Feature: Monkey Prototype
+As monkey coder
+I want to fast create http prototype
 
-Scenario: Example scenario
-When foo
-Then bar
+Scenario: Generate prototype from json
+When I define prototype 
+----------
+{
+ "Paragraph": "foo"
+}
+----------
+Then I should see  html output "<p>foo</p>"

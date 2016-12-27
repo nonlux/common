@@ -10,8 +10,16 @@ const dictionary = new Yadda.Dictionary()
                 (data, cb) => cb(null, JSON.parse(data)))
         .define('escapeString', /"([^"]*)"/, (data, cb) => cb(null, data));
 
+
+const generator = () => '';
+
 export default function libraryInstance() {
   const context = {};
   return English.library(dictionary)
-    .when('foo', () => console.log('foo'));
+    .when('I define prototype\n$js', (js) => {
+      context.proto = js;
+    })
+    .then('I should see  html output $escapeString', (html) => {
+      generator(context).should.be.equal(html);
+    });
 }
