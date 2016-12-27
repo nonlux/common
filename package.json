@@ -22,10 +22,11 @@
       }
     },
     "mocha:features": {
-      "command": "mocha --require ./src/resolve.js --require babel-polyfill --compilers js:babel-register test/index.js",
+      "command": "mocha --reporter mocha-better-spec-reporter --require ./src/resolve.js --require babel-polyfill --compilers js:babel-register test/index.js",
       "env": {
         "NODE_ENV": "test",
-        "BABEL_CACHE_PATH": "./.cache/babel.json"
+        "BABEL_CACHE_PATH": "./.cache/babel.json",
+        "MOCHA_REPORTER_STACK_EXCLUDE": "node_modules/**"
       }
     },
     "mocha:spec": {
@@ -66,6 +67,7 @@
     "flow-bin": "^0.36.0",
     "json-loader": "^0.5.4",
     "mocha": "^3.2.0",
+    "mocha-better-spec-reporter": "^3.1.0",
     "sinon": "^1.17.6",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2",
