@@ -1,4 +1,4 @@
-/* eslint import/no-extraneous-dependencies: 0 */
+/* eslint no-console: 0, */
 import path from 'path';
 import fs from 'fs';
 import webpack from 'webpack';
@@ -7,7 +7,7 @@ import CleanPlugin from 'clean-webpack-plugin';
 
 /* path and env */
 const PWD = process.cwd();
-const SRC_DIR = path.resolve(PWD, 'src');
+// const SRC_DIR = path.resolve(PWD, 'src');
 const BUILD_DIR = path.resolve(PWD, 'dist');
 const STATIC_DIR = path.resolve(PWD, 'static/');
 
@@ -102,8 +102,8 @@ const config = {
   devServer: {
     outputPath: BUILD_DIR,
     contentBase: BUILD_DIR,
-    hot: true
-  }
+    hot: true,
+  },
 };
 
 
