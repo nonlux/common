@@ -1,5 +1,6 @@
 import Yadda, { localisation } from 'yadda'; // eslint-disable-line import/no-extraneous-dependencies
 import { should } from 'chai';
+import htmlGenerator from 'html-generator';
 
 should();
 
@@ -10,9 +11,6 @@ const dictionary = new Yadda.Dictionary()
                 (data, cb) => cb(null, JSON.parse(data)))
         .define('escapeString', /"([^"]*)"/, (data, cb) => cb(null, data));
 
-
-const generator = () => '';
-
 export default function libraryInstance() {
   const context = {};
   return English.library(dictionary)
@@ -20,6 +18,6 @@ export default function libraryInstance() {
       context.proto = js;
     })
     .then('I should see  html output $escapeString', (html) => {
-      generator(context).should.be.equal(html);
+      htmlGenerator(context.proto).should.be.equal(html);
     });
 }

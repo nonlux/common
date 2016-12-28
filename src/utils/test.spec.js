@@ -1,8 +1,8 @@
 import foo from 'utils/foo';
 
 describe('test', () => {
-  it('foo', (done) => {
+  it('foo test', (done) => {
     foo();
-    done('Error');
+    done();
   });
 });

@@ -9,4 +9,4 @@ When I define prototype
  "Paragraph": "foo"
 }
 ----------
-Then I should see  html output "<p>foo</p>"
+Then I should see  html output "<div><p>foo</p></div>"

@@ -8,6 +8,11 @@ module.exports = {
   },
   rules: {
     'import/extensions': 0,
+    'import/prefer-default-export': 0,
+    'import/no-extraneous-dependencies': 0,
+    'import/no-unresolved': 0,
+    'flowtype-errors/show-errors': 2,
+    'react/jsx-filename-extension': 0,
   },
   plugins: ['react', 'import', 'flowtype-errors'],
   settings: {
@@ -15,6 +20,8 @@ module.exports = {
     'import/resolve': {
       moduleDirectory: ['node_modules', 'src'],
     },
+
+
   },
   parserOptions: {
     ecmaFeatures: {
